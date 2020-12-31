@@ -1,0 +1,31 @@
+root = true
+
+# Indent using 2 spaces is a common
+# convention found in formats such as e.g.
+# terraform scripts (terraform fmt),
+# yaml (https://yaml.org/faq.html), etc.
+# Using it therefore as default
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+tab_width = 2
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Indent shell scripts with tabs
+# for heredoc whitespace spripping
+[{.git*,*.sh}{,.j2}]
+end_of_line = lf
+indent_style = tab
+indent_size = 4
+tab_width = 4
+
+[*.{bat,cmd}{,.j2}]
+end_of_line = crlf
+
+[.json]
+indent_style = tab
+
+[*.md]
+indent_size = 4

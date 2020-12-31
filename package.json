@@ -1,0 +1,64 @@
+{
+	"name": "vscode-url-title-resolver",
+	"displayName": "URL title resolver for Markdown",
+	"description": "Resolves selected URLs of one or more HTML pages and uses the document title(s) to format Markdown links",
+	"version": "1.0.0",
+	"publisher": "capybara1",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/capybara1/vscode-url-title-resolver.git"
+	},
+	"engines": {
+		"vscode": "^1.52.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:vscode-url-title-resolver.resolve-url-title"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "vscode-url-title-resolver.resolve-url-title",
+				"title": "Resolve title for URL(s)"
+			}
+		],
+		"menus": {
+			"commandPalette": [
+				{
+					"command": "vscode-url-title-resolver.resolve-url-title",
+					"when": "editorLangId == markdown"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"pretest": "npm run compile && npm run lint",
+		"lint": "eslint src --ext ts",
+		"test": "node ./out/test/runTest.js",
+		"package": "vsce package",
+		"deploy": "vsce publish"
+	},
+	"dependencies": {
+		"axios": "^0.21.1"
+	},
+	"devDependencies": {
+		"@types/glob": "^7.1.3",
+		"@types/mocha": "^8.0.4",
+		"@types/node": "^12.11.7",
+		"@types/vscode": "^1.52.0",
+		"@typescript-eslint/eslint-plugin": "^4.9.0",
+		"@typescript-eslint/parser": "^4.9.0",
+		"eslint": "^7.15.0",
+		"glob": "^7.1.6",
+		"mocha": "^8.1.3",
+		"typescript": "^4.1.2",
+		"vsce": "^1.83.0",
+		"vscode-test": "^1.4.1"
+	}
+}
