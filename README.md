@@ -52,4 +52,4 @@ See [CHANGELOG](./CHANGELOG.md)
 
 # Latest Version
 
-Please visit the [release page](./releases/) for details
+Please visit the [release page](https://github.com/capybara1/vscode-url-title-resolver/releases) for details
