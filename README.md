@@ -31,7 +31,8 @@ Resolves selected URLs of one or more HTML pages and uses the document title(s) 
 1.  [Install](#installation) extension into VSCode and reload
 2.  Create or open an existing Markdown file
     and ensure it contains least one plain URL
-3.  Select text, inclding the URL(s)
+3.  Select a text region or place the cursor
+    in a line that contains one or more URLs
 4.  Open Command Palette and select _Resolve title for URL(s)_
 5.  Wait until completions of the command execution and
     review the summary shown in a notification

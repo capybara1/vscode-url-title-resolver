@@ -16,17 +16,23 @@ export function activate(context: vscode.ExtensionContext) {
 				return;
 			}
 
-			textEditor.selections.forEach(
-				sel => resolveTitlesForSelection(textEditor, sel));
+			if (textEditor.selection.isEmpty) {
+				const lineNumber = textEditor.selection.active.line;
+				const line = textEditor.document.lineAt(lineNumber);
+				resolveTitlesForRange(textEditor, line.range);
+			} else {
+				textEditor.selections.forEach(
+					sel => resolveTitlesForRange(textEditor, sel));
+			}
 		});
 
 	context.subscriptions.push(disposable);
 }
 
-function resolveTitlesForSelection(
+function resolveTitlesForRange(
 		textEditor: vscode.TextEditor,
-		selection: vscode.Selection) {
-	const text = textEditor.document.getText(selection);
+		range: vscode.Range) {
+	const text = textEditor.document.getText(range);
 	const urls = getUrls(text);
 	console.log(`Urls found: ${urls}`);
 	requestTitles(urls)
@@ -35,14 +41,14 @@ function resolveTitlesForSelection(
 			if (titleInfos.mapping.size === 0) {
 				return;
 			}
-			const replacement = getReplacementForSelection(text, titleInfos);
+			const replacement = getReplacementForRange(text, titleInfos);
 			textEditor.edit(e => {
-				e.replace(selection, replacement);
+				e.replace(range, replacement);
 			});
 		});
 }
 
-function getReplacementForSelection(text: string, titleInfos: TitleInfos) {
+function getReplacementForRange(text: string, titleInfos: TitleInfos) {
 	return replaceUrlsAndIncompleteLinks(text, url => {
 		const title = titleInfos.mapping.get(url);
 		if (title) {

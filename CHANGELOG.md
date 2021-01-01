@@ -9,6 +9,8 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ### Added
 
 - Icon for extension
+- Resolution of URLs within the current line in the editor
+  in case there is no selection
 
 ### Changed
 
