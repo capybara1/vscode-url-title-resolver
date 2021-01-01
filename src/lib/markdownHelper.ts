@@ -1,4 +1,4 @@
-const urlRegExp = /\[\]\((https?\:\/\/[^\)]+)\)|(https?\:\/\/[^\s\)\>\n]+)/gi;
+const urlRegExp = /\[\]\((https?\:\/\/[^\)]+)\)|\<(https?\:\/\/[^\>]+)\>|(https?\:\/\/[^\s\n]+)/gi;
 
 export function getUrls(text: string): string[] {
 	const urls = new Set<string>();
@@ -7,21 +7,25 @@ export function getUrls(text: string): string[] {
 		if (matches === null) {
 			break;
 		}
-		const url = matches[1] ? matches[1] : matches[0];
+		const url = matches.slice(1).find(str => str) || matches[0];
 		urls.add(url);
 	}
 
 	const result =  Array.from(urls.values());
-	
+
 	return result;
 }
 
-export function replaceUrlsAndIncompleteLinks(text: string, callback: (url:string) => string|undefined): string {
+export function replaceUrlsAndIncompleteLinks(
+		text: string,
+		callback: (url:string) => string|undefined): string {
 	urlRegExp.lastIndex = 0;
-	const result = text.replace(urlRegExp, (match: string, group1: string|undefined) => {
-		const url = group1 ? group1 : match;
-		return callback(url) || match;
-	});
+	const result = text.replace(
+		urlRegExp,
+		(match: string, group1: string|undefined, group2: string|undefined, group3: string|undefined) => {
+			const url = [group1, group2, group3].find(str => str) || match;
+			return callback(url) || match;
+		});
 
 	return result;
 }

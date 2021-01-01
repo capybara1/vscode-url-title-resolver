@@ -11,6 +11,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Icon for extension
 - Resolution of URLs within the current line in the editor
   in case there is no selection
+- Support for angel bracket syntax
 
 ### Changed
 
