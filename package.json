@@ -2,7 +2,7 @@
 	"name": "vscode-url-title-resolver",
 	"displayName": "URL title resolver for Markdown",
 	"description": "Resolves selected URLs of one or more HTML pages and uses the document title(s) to format Markdown links",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"publisher": "capybara1",
 	"repository": {
 		"type": "git",

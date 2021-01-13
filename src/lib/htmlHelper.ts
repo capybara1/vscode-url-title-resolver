@@ -240,7 +240,7 @@ const htmlEntityMapping = new Map<string, string>([
 	['diams', '♦']
 ]);
 
-const htmlEntityRegExp = new RegExp(`&(#\\d+|${Array.from(htmlEntityMapping.keys()).join('|')});`, 'gi');
+const htmlEntityRegExp = new RegExp(`&(#\\d+|#x[\\da-fA-F]+|${Array.from(htmlEntityMapping.keys()).join('|')});`, 'gi');
 
 export function getTitle(html: string): string|null {
 	const matches = html.match(/(?<=\<title\>).*?(?=\<\/title\>)/si);
@@ -262,12 +262,16 @@ function sanitizeTitle(title: string): string {
 function resolveHtmlEntities(html: string) {
 	return html.replace(
 		htmlEntityRegExp,
-		(_, p1: string): string => {
+		(match, p1: string): string => {
 			const char = htmlEntityMapping.get(p1);
 			if (char) {
 				return char;
 			}
-			const codePoint = +p1.substr(1);
-			return String.fromCodePoint(codePoint);
+			const codePoint = +p1.substr(1) || parseInt(p1.substr(2), 16);
+			const result = codePoint
+				? String.fromCodePoint(codePoint)
+				: match;
+
+			return result;
 		});
 }

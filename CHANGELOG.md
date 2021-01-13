@@ -4,6 +4,12 @@ All notable changes to the "vscode-url-title-resolver" extension will be documen
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [1.1.1]
+
+### Changed
+
+- Fixed hexadecimal code-points are not converted
+
 ## [1.1.0]
 
 ### Added
